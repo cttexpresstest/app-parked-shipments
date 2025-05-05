@@ -53,27 +53,12 @@ const StockManagement: React.FC<StockManagementProps> = ({
         />
         
         <div style={{ margin: '1rem 0' }}>
-          <div style={{ position: 'relative' }}>
-            <div style={{ 
-              position: 'absolute', 
-              top: 0, 
-              bottom: 0, 
-              left: 0, 
-              paddingLeft: '12px', 
-              display: 'flex', 
-              alignItems: 'center', 
-              pointerEvents: 'none' 
-            }}>
-              <Search size={20} color={colors.gray[400]} />
-            </div>
-            <div style={{ paddingLeft: '28px' }}>
-              <Input
-                placeholder="Buscar por código de bulto o ubicación..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-            </div>
-          </div>
+          <Input
+            placeholder="Buscar por código de bulto o ubicación..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            icon={<Search size={20} color={colors.gray[400]} />}
+          />
         </div>
         
         <PackageTable 

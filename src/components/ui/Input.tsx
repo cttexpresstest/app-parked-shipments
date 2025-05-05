@@ -7,7 +7,7 @@ interface InputProps {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   type?: string;
-
+  icon?: React.ReactNode;
   error?: string;
   required?: boolean;
   name?: string;
@@ -22,7 +22,7 @@ const Input: React.FC<InputProps> = ({
   value,
   onChange,
   type = 'text',
-
+  icon,
   error,
   required = false,
   name,
@@ -38,21 +38,38 @@ const Input: React.FC<InputProps> = ({
           {required && <span style={{ color: colors.error[500], marginLeft: '0.25rem' }}>*</span>}
         </label>
       )}
-      <input
-        type={type}
-        name={name}
-        id={id || name}
-        value={value}
-        onChange={onChange}
-        disabled={disabled}
-        placeholder={placeholder}
-        style={{
-          ...cssStyles.input.base,
-          ...cssStyles.input.sizes[size],
-          ...(error ? cssStyles.input.states.error : {}),
-          ...(disabled ? { backgroundColor: colors.gray[100], cursor: 'not-allowed' } : {})
-        }}
-      />
+      <div style={{ position: 'relative' }}>
+        {icon && (
+          <div style={{
+            position: 'absolute',
+            left: '10px',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            display: 'flex',
+            alignItems: 'center',
+            pointerEvents: 'none',
+            zIndex: 1
+          }}>
+            {icon}
+          </div>
+        )}
+        <input
+          type={type}
+          name={name}
+          id={id || name}
+          value={value}
+          onChange={onChange}
+          disabled={disabled}
+          placeholder={placeholder}
+          style={{
+            ...cssStyles.input.base,
+            ...cssStyles.input.sizes[size],
+            ...(error ? cssStyles.input.states.error : {}),
+            ...(disabled ? { backgroundColor: colors.gray[100], cursor: 'not-allowed' } : {}),
+            ...(icon ? { paddingLeft: '38px' } : {})
+          }}
+        />
+      </div>
       {error && <p style={cssStyles.form.error}>{error}</p>}
     </div>
   );
